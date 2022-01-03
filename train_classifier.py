@@ -60,7 +60,7 @@ def train(cfg):
         gpus=cfg['gpus'],
         accelerator='ddp' if platform.system() != 'Windows' else None,
         plugins=DDPPlugin(
-            find_unused_parameters=False) if platform.system() != 'Windows' else None,
+            find_unused_parameters=True) if platform.system() != 'Windows' else None,
         callbacks=callbacks,
         **cfg['trainer_options'])
     trainer.fit(model_module, data_module)
