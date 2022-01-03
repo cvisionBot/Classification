@@ -1,3 +1,4 @@
+gpus: 1 # -1 : use all gpus
 model : 'ResNet'
 dataset_name : 'tiny-imagenet'
 classes : 20
@@ -6,7 +7,7 @@ save_dir : './saved'
 
 workers : 64
 epochs : 1000
-batch_size : 20
+batch_size : 256
 
 save_freq : 5
 
