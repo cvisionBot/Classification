@@ -41,7 +41,8 @@ class TinyImageNetDataset(Dataset):
         else:
             label = self.val_list[os.path.basename(img_file)]
         transformed = self.transforms(image=img)['image']
-        return {'img' : torch.stack([transformed]), 'class' : label}
+        # return {'img' : torch.stack([transformed]), 'class' : label}
+        return transformed, label
 
 class TinyImageNet(pl.LightningDataModule):
     def __init__(self, path, workers, train_transforms, val_transforms, batch_size=None):
