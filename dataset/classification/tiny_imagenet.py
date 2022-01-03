@@ -2,6 +2,7 @@
 import os
 import cv2
 import glob
+import torch
 import pytorch_lightning as pl
 from torch.utils.data import Dataset, DataLoader
 
@@ -40,7 +41,7 @@ class TinyImageNetDataset(Dataset):
         else:
             label = self.val_list[os.path.basename(img_file)]
         transformed = self.transforms(image=img)['image']
-        return {'img' : transformed, 'class' : label}
+        return {'img' : torch.stack([transformed]), 'class' : label}
 
 class TinyImageNet(pl.LightningDataModule):
     def __init__(self, path, workers, train_transforms, val_transforms, batch_size=None):
@@ -86,7 +87,7 @@ if __name__ == '__main__':
         albumentations.Normalize(0, 1),
         albumentations.pytorch.ToTensorV2()])
 
-    loader = DataLoader(TinyImageNetDataset(path='/mnt/', transforms=train_transforms, is_train=True))
+    loader = DataLoader(TinyImageNetDataset(path='/ssd2/lyj/dataset/tiny-imagenet-200', transforms=train_transforms, is_train=True))
                             # batch_size=1, shuffle=True))
     for batch, sample in enumerate(loader):
         print('image : ', sample['img'])

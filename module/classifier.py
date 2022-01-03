@@ -40,7 +40,7 @@ class Classifier(pl.LightningModule):
 
     def configure_optimizers(self):
         cfg = self.hparams.cfg
-        optim = get_optimizer(cfg['optimizer'])(
+        optim = get_optimizer(cfg['optimizer'],
             params=self.model.parameters(),
             **cfg['optimizer_options'])
 
