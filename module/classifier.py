@@ -2,7 +2,6 @@ import pytorch_lightning as pl
 import torch.nn.functional as F
 
 from torchmetrics import Accuracy
-
 from utils.module_select import get_optimizer
 
 
@@ -40,7 +39,7 @@ class Classifier(pl.LightningModule):
 
     def configure_optimizers(self):
         cfg = self.hparams.cfg
-        optim = get_optimizer(cfg['optimizer'],
+        optim = get_optimizer(cfg['optimizer'])(
             params=self.model.parameters(),
             **cfg['optimizer_options'])
 

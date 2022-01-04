@@ -41,7 +41,6 @@ class TinyImageNetDataset(Dataset):
         else:
             label = self.val_list[os.path.basename(img_file)]
         transformed = self.transforms(image=img)['image']
-        # return {'img' : torch.stack([transformed]), 'class' : label}
         return transformed, label
 
 class TinyImageNet(pl.LightningDataModule):
@@ -60,7 +59,8 @@ class TinyImageNet(pl.LightningDataModule):
                           batch_size=self.batch_size,
                           num_workers=self.workers,
                           persistent_workers=self.workers > 0,
-                          pin_memory=self.workers > 0)
+                          pin_memory=self.workers > 0,
+                          )
 
     def val_dataloader(self):
         return DataLoader(TinyImageNetDataset(self.path,
@@ -69,7 +69,8 @@ class TinyImageNet(pl.LightningDataModule):
                           batch_size=self.batch_size,
                           num_workers=self.workers,
                           persistent_workers=self.workers > 0,
-                          pin_memory=self.workers > 0)
+                          pin_memory=self.workers > 0,
+                          )
 
 
 if __name__ == '__main__':
@@ -80,7 +81,7 @@ if __name__ == '__main__':
 
     import albumentations
     import albumentations.pytorch
-    from dataset.classification.utils import visualize
+    from dataset.classfication.utils import visualize
 
     train_transforms = albumentations.Compose([
         albumentations.HorizontalFlip(p=0.5),
@@ -88,7 +89,7 @@ if __name__ == '__main__':
         albumentations.Normalize(0, 1),
         albumentations.pytorch.ToTensorV2()])
 
-    loader = DataLoader(TinyImageNetDataset(path='/ssd2/lyj/dataset/tiny-imagenet-200', transforms=train_transforms, is_train=True))
+    loader = DataLoader(TinyImageNetDataset(path='/mnt', transforms=train_transforms, is_train=True))
                             # batch_size=1, shuffle=True))
     for batch, sample in enumerate(loader):
         print('image : ', sample['img'])
