@@ -15,3 +15,4 @@ def visualize(images, classes, batch_idx=0):
     # cv2.imshow('img', img)
     # cv2.waitKey(0)
     cv2.imwrite('/home/torch/Classification/docs/class'+str(label)+'.JPEG', img)
+

@@ -64,15 +64,10 @@ class _ResNet50(nn.Module):
     
     def forward(self, input):
         stem= self.resnetStem(input)
-        print('stem shape : ', stem.shape)
         s1 = self.layer1(stem)
-        print('s1 shape : ', s1.shape)
         s2 = self.layer2(s1)
-        print('s2 shape : ', s2.shape)
         s3 = self.layer3(s2)
-        print('s3 shape : ', s3.shape)
         s4 = self.layer4(s3)
-        print('s4 shape : ', s4.shape)
         pred = self.classification(s4)
         b, c, _, _ = pred.size()
         pred = pred.view(b, c)

@@ -1,2 +1,3 @@
 from .backbone.resnet import ResNet
-__all__ = ['ResNet']
+from .backbone.resnext import ResNeXt
+__all__ = ['ResNet', 'ResNeXt']
