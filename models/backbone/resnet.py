@@ -69,8 +69,9 @@ class _ResNet50(nn.Module):
         s3 = self.layer3(s2)
         s4 = self.layer4(s3)
         pred = self.classification(s4)
-        b, c, _, _ = pred.size()
-        pred = pred.view(b, c)
+        shape = torch.tensor(pred.shape)
+        # b, c, _, _ = pred.size()
+        pred = pred.view(shape[0], shape[1])
         return {'pred':pred}
 
 
