@@ -2,7 +2,6 @@ import pytorch_lightning as pl
 import torch.nn.functional as F
 
 from torchmetrics import Accuracy
-
 from utils.module_select import get_optimizer
 
 
