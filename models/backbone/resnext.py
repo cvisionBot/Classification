@@ -55,12 +55,9 @@ class _ResNeXt50(nn.Module):
         input_ch = cfg[0]
         for i in range(cfg[-1]):
             if i == 0:
-                layer=ResNeXt_Block(in_channels=self.pre_ch, kernel_size=cfg[1], out_channels=cfg[2])
+                layer = ResNeXt_Block(in_channels=self.pre_ch, kernel_size=cfg[1], out_channels=cfg[2], stride=cfg[3])
             else:
-                if cfg[-1] - i == 1:
-                    layer = ResNeXt_Block(in_channels=input_ch, kernel_size=cfg[1], out_channels=cfg[2], stride=cfg[3])
-                else:
-                    layer = ResNeXt_Block(in_channels=input_ch, kernel_size=cfg[1], out_channels=cfg[2])
+                layer = ResNeXt_Block(in_channels=input_ch, kernel_size=cfg[1], out_channels=cfg[2])
             layers.append(layer)
             input_ch = layer.get_channel()
         return nn.Sequential(*layers)
