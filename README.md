@@ -54,21 +54,7 @@ Backbone 모델을 Classifier로 Pre-train 시키기 위한 스크립트 입니�
 
     python train_classifier.py --cfg configs/cls_resnet.yaml
 
-
-## Evalulate
-
-학습된 Object Detector의 mAP를 평가하는 스크립트 입니다.
-
-    TBD
-
-## Reference
-Networks
-- [ResNet: Deep Residual Learning for Image Recognition](https://arxiv.org/abs/1512.03385)
-  - [Torchvision Github](https://github.com/pytorch/vision/blob/main/torchvision/models/resnet.py)
-
-
 ## TODOs
-
-- Backbone Networks 추가 (MobileNet, EfficientNet, RegNet ...)
+- Backbone Networks Customizing
 - Deployment를 위한 ONNX Conversion Script, Torch Script 추가
 - QAT, Grad Clip, SWA, FP16 등 학습 기법 추가 및 테스트

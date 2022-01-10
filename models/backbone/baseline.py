@@ -1,5 +1,5 @@
 from ..layers.convolution import Conv2dBnAct, Conv2dBn
-from ..layers.blocks import Residual_Block
+from ..layers.blocks import Residual_LiteBlock
 from ..initialize import weight_initialize
 
 import torch
