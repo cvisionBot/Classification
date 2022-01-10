@@ -1,4 +1,4 @@
-model : 'ResNet'
+model : 'BaseNet'
 dataset_name : 'tiny-imagenet'
 classes : 200
 data_path : '/mnt'

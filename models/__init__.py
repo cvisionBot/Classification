@@ -1,3 +1,2 @@
-from .backbone.resnet import ResNet
-from .backbone.resnext import ResNeXt
-__all__ = ['ResNet', 'ResNeXt']
+from .backbone.baseline import BaseNet
+__all__ = ['BaseNet']
