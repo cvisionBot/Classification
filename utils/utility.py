@@ -1,5 +1,4 @@
-import torch
-import numpy as np
+
 
 def make_divisible(v, divisor=8, min_value=None):
     if min_value is None:
@@ -7,12 +6,19 @@ def make_divisible(v, divisor=8, min_value=None):
     new_v = max(min_value, int(v+divisor/2)//divisor * divisor)
     if new_v < 0.9 * v:
         new_v += divisor
+
     return new_v
 
-def make_model_name(cfg):
-    return cfg['model']
 
-def preprocess_input(image, mean=0, std=1., max_pixel=255.):
-    normalized = (image.astype(np.float32) - mean *
-                  max_pixel) / (std * max_pixel)
-    return torch.tensor(normalized).permute(2, 0, 1)
+def make_model_name(cfg):
+    return cfg['model'] + '_' + cfg['dataset_name']
+
+
+def set_parameter_requires_grad(model, feature_extracting):
+    if feature_extracting:
+        for param in model.parameters():
+            param.requires_grad = False
+            
+
+if __name__ == '__main__':
+    print(f'{make_divisible(16)}')

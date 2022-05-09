@@ -1,9 +1,13 @@
 import re
 import yaml
 
+'''
+https://stackoverflow.com/questions/30458977/yaml-loads-5e-6-as-string-and-not-a-number
+1e-3을 str이 아닌 float으로 인식하기 위한 조치
+'''
 
-__loader = yaml.SafeLoader
-__loader.add_implicit_resolver(
+loader = yaml.SafeLoader
+loader.add_implicit_resolver(
     u'tag:yaml.org,2002:float',
     re.compile(u'''^(?:
      [-+]?(?:[0-9][0-9_]*)\\.[0-9_]*(?:[eE][-+]?[0-9]+)?
@@ -17,15 +21,24 @@ __loader.add_implicit_resolver(
 
 def load_yaml_file(file):
     with open(file, 'r') as f:
-        return yaml.load(f, Loader=__loader)
+        return yaml.load(f, Loader=loader)
 
 
-def get_train_configs(file=None):
-    default_configs = load_yaml_file('configs/default_settings.yaml')
+def get_configs(file):
+    configs = load_yaml_file(file)
 
-    if file:
-        custom_configs = load_yaml_file(file)
-    if custom_configs:
-        default_configs.update(custom_configs)
+    return configs
 
-    return default_configs
+
+if __name__ == "__main__":
+    cfg = get_configs("configs/yolov1-adam.yaml")
+    print(cfg)
+    print(cfg['optimizer_options']['lr'])
+    try: 
+        cfg['a']
+    except KeyError:
+        print(f'ldjfakljladsjklfj')
+    
+    print(type(cfg['scheduler_options']['gamma']))
+    print(cfg['scheduler_options']['gamma'])
+    
